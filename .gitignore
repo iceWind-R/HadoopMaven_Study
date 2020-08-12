@@ -1,0 +1,3 @@
+# Project exclude paths
+/hdfs_api_demo/target/
+/mapreduce/target/

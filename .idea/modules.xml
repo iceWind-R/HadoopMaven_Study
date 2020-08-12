@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/HadoopMavenProject.iml" filepath="$PROJECT_DIR$/.idea/HadoopMavenProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hdfs_api_demo/hdfs_api_demo.iml" filepath="$PROJECT_DIR$/hdfs_api_demo/hdfs_api_demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mapreduce/mapreduce.iml" filepath="$PROJECT_DIR$/mapreduce/mapreduce.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zookeeper_api_demo/zookeeper_api_demo.iml" filepath="$PROJECT_DIR$/zookeeper_api_demo/zookeeper_api_demo.iml" />
+    </modules>
+  </component>
+</project>
