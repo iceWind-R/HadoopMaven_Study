@@ -7,16 +7,18 @@ import org.apache.curator.framework.recipes.cache.TreeCacheEvent;
 import org.apache.curator.framework.recipes.cache.TreeCacheListener;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.zookeeper.CreateMode;
+import org.junit.Test;
 
 public class ZookeeperApiDemo {
-    @org.junit.Test
+    @Test
     public void createZnode() throws Exception {
         //1：定制一个重试策略
         /*
          * param1：重试的间隔时间，单位ms
          * param2：重试的最大次数
          * */
-        RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 1);
+        RetryPolicy retryPolicy =
+                new ExponentialBackoffRetry(1000, 1);
         //2：获取一个客户端对象
         /*
          * param1：要连接的Zookeeper服务器列表
@@ -24,8 +26,10 @@ public class ZookeeperApiDemo {
          * param3：连接的超时时间
          * param4：重试策略
          * */
-        String connStr = "bigdata1:2181,bigdata2:2181,bigdata3:2181"; // 有多个主机时，每个主机之间用逗号连接，并且注意：不要为美观而乱加空格！
-        CuratorFramework client = CuratorFrameworkFactory.newClient(connStr, 3000, 3000, retryPolicy);
+        // 有多个主机时，每个主机之间用逗号连接，并且注意：不要为美观而乱加空格！
+        String connStr = "bigdata1:2181,bigdata2:2181,bigdata3:2181";
+        CuratorFramework client = CuratorFrameworkFactory.newClient
+                (connStr, 3000, 3000, retryPolicy);
         //3：开启客户端
         client.start();
         //4：创建结点
@@ -36,10 +40,12 @@ public class ZookeeperApiDemo {
          * */
 
         //创建永久结点
-        client.create().creatingParentsIfNeeded().withMode(CreateMode.PERSISTENT).forPath("/Test/hello4", "JavaApiTest".getBytes());
+        client.create().creatingParentsIfNeeded().withMode(CreateMode.PERSISTENT).
+                forPath("/Test/hello4", "JavaApiTest".getBytes());
 
         //创建临时性结点
-        client.create().creatingParentsIfNeeded().withMode(CreateMode.EPHEMERAL).forPath("/Test/tmp", "临时".getBytes());
+        client.create().creatingParentsIfNeeded().withMode(CreateMode.EPHEMERAL).
+                forPath("/Test/tmp", "临时".getBytes());
 
         // 因为临时结点只在会话时有效，为保证看到效果，使程序休眠10s
         Thread.sleep(10000);
@@ -59,11 +65,13 @@ public class ZookeeperApiDemo {
     /*
      * 结点的watch机制
      * */
-    @org.junit.Test
+    @Test
     public void watchZnode() throws Exception {
-        RetryPolicy retryPolicy = new ExponentialBackoffRetry(3000,1);
+        RetryPolicy retryPolicy =
+                new ExponentialBackoffRetry(3000,1);
         String connStr = "bigdata1:2181,bigdata2:2181,bigdata3:2181";
-        CuratorFramework client = CuratorFrameworkFactory.newClient(connStr, 8000, 8000, retryPolicy);
+        CuratorFramework client = CuratorFrameworkFactory.newClient
+                (connStr, 8000, 8000, retryPolicy);
         client.start();
 
         // 创建一个TreeCache对象，指定要监控的结点路径
@@ -72,7 +80,8 @@ public class ZookeeperApiDemo {
         // 自定义监听器
         treeCache.getListenable().addListener(new TreeCacheListener() {
             @Override
-            public void childEvent(CuratorFramework curatorFramework, TreeCacheEvent treeCacheEvent) throws Exception {
+            public void childEvent(CuratorFramework curatorFramework,
+                                   TreeCacheEvent treeCacheEvent) throws Exception {
                 ChildData data = treeCacheEvent.getData();
                 if (data != null){
                     switch (treeCacheEvent.getType()){ //获取事件的触发类型
