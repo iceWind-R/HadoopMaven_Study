@@ -1,5 +1,8 @@
+package wordCount;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
+import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -9,6 +12,8 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
+import java.net.URI;
+
 public class JobMain extends Configured implements Tool {
     // 该方法用于指定一个Job任务
     @Override
@@ -16,8 +21,10 @@ public class JobMain extends Configured implements Tool {
         // 创建一个job任务对象
         // 第一个参数是一个configuration，下面的main方法调用时已经传入，存在Configured类中，通过getConf()方法获取
         Job job = Job.getInstance(super.getConf(), "wordCount");
-        // 配置job任务对象 (8个步骤)
 
+        //job.setJarByClass(wordCount.JobMain.class); // 如果打包出错，则需要该行代码
+
+        // 配置job任务对象 (8个步骤)
         //1、指定文件的读取方式和读取路径
         job.setInputFormatClass(TextInputFormat.class);
         TextInputFormat.addInputPath(job, new Path("hdfs://bigdata1:8020/wordcount"));
@@ -32,6 +39,8 @@ public class JobMain extends Configured implements Tool {
         job.setMapOutputValueClass(LongWritable.class);
 
         // 第3，4，5，6采用默认的方式
+        // 第5步，规约，combiner
+        job.setCombinerClass(WordCountReducer.class);
 
         // 7、指定Reduce阶段的处理方式和数据类型
         job.setReducerClass(WordCountReducer.class);
@@ -40,9 +49,16 @@ public class JobMain extends Configured implements Tool {
 
         //8、设置输出类型
         job.setOutputFormatClass(TextOutputFormat.class);
-        // 设置输出路径
-        TextOutputFormat.setOutputPath(job,new Path("hdfs://bigdata1:8020/wordCount_out"));
+        // 设置输出路径，并判断该目录是否存在，存在则删除
+        Path path = new Path("hdfs://bigdata1:8020/wordCount_out");
+        TextOutputFormat.setOutputPath(job,path);
         //TextOutputFormat.setOutputPath(job,new Path("file:///D:\\mapReduce\\output"));
+
+        // 判断目标目录是否存在
+        FileSystem fileSystem = FileSystem.get(new URI("hdfs://bigdata1:8020/"), new Configuration());
+        if(fileSystem.exists(path)){
+            fileSystem.delete(path, true);
+        }
 
         // 等待任务结束
         boolean bl = job.waitForCompletion(true);

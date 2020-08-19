@@ -15,7 +15,7 @@
     <bytecodeTargetLevel>
       <module name="hdfs_api_demo" target="1.8" />
       <module name="mapreduce" target="1.8" />
-      <module name="test" target="1.5" />
+      <module name="test" target="1.8" />
       <module name="zookeeper_api_demo" target="1.8" />
     </bytecodeTargetLevel>
   </component>
