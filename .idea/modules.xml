@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/HadoopMavenProject.iml" filepath="$PROJECT_DIR$/.idea/HadoopMavenProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/hdfs_api_demo/hdfs_api_demo.iml" filepath="$PROJECT_DIR$/hdfs_api_demo/hdfs_api_demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hive/hive.iml" filepath="$PROJECT_DIR$/hive/hive.iml" />
       <module fileurl="file://$PROJECT_DIR$/mapreduce/mapreduce.iml" filepath="$PROJECT_DIR$/mapreduce/mapreduce.iml" />
       <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
       <module fileurl="file://$PROJECT_DIR$/zookeeper_api_demo/zookeeper_api_demo.iml" filepath="$PROJECT_DIR$/zookeeper_api_demo/zookeeper_api_demo.iml" />
