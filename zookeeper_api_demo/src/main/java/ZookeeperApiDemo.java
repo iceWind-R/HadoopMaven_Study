@@ -17,8 +17,7 @@ public class ZookeeperApiDemo {
          * param1：重试的间隔时间，单位ms
          * param2：重试的最大次数
          * */
-        RetryPolicy retryPolicy =
-                new ExponentialBackoffRetry(1000, 1);
+        RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 1);
         //2：获取一个客户端对象
         /*
          * param1：要连接的Zookeeper服务器列表
@@ -68,7 +67,7 @@ public class ZookeeperApiDemo {
     @Test
     public void watchZnode() throws Exception {
         RetryPolicy retryPolicy =
-                new ExponentialBackoffRetry(3000,1);
+                new ExponentialBackoffRetry(3000, 1);
         String connStr = "bigdata1:2181,bigdata2:2181,bigdata3:2181";
         CuratorFramework client = CuratorFrameworkFactory.newClient
                 (connStr, 8000, 8000, retryPolicy);
@@ -83,8 +82,8 @@ public class ZookeeperApiDemo {
             public void childEvent(CuratorFramework curatorFramework,
                                    TreeCacheEvent treeCacheEvent) throws Exception {
                 ChildData data = treeCacheEvent.getData();
-                if (data != null){
-                    switch (treeCacheEvent.getType()){ //获取事件的触发类型
+                if (data != null) {
+                    switch (treeCacheEvent.getType()) { //获取事件的触发类型
                         case NODE_ADDED: // 表示新增结点触发的watch
                             System.out.println("NODE_ADDED");
                             break;

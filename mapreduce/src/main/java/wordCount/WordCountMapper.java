@@ -14,7 +14,7 @@ import java.io.IOException;
 * VALUEOUT:V2的类型
 *
 * 使用已经给出定义好的类型，基本类型的封装，操作序列化起来更加方便
-* <Long, String, Long, String>  - > <LongWritable, Text, Text, LongWritable>
+* <Long, String, Long, String>  - >   <LongWritable, Text, Text, LongWritable>
 * */
 public class WordCountMapper extends Mapper<LongWritable, Text, Text, LongWritable> {
     /* map方法就是将 K1 和 V1 转换为 K2 和 V2

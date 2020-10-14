@@ -31,10 +31,19 @@ public class HdfsApiDemo  {
     /*
      * 获取FileSystem的第二种方法
      * */
+
     @Test
-    public void getFileSystem2() throws IOException, URISyntaxException {
-        FileSystem fileSystem = FileSystem.get(new URI("hdfs://bigdata1:8020"), new Configuration());
+    public void getFileSystem2() throws IOException, URISyntaxException, InterruptedException {
+        /* 第一个参数 HDFS 的主机名 + 端口
+         * 第二个参数：一个Configuration 对象
+         * 第三个参数：指定用户，root用户为超级管理员
+         */
+        FileSystem fileSystem = FileSystem.get(new URI("hdfs://bigdata1:8020"), new Configuration(), "root");
         System.out.println(fileSystem);
+        // 输出 DFS[DFSClient[clientName=DFSClient_NONMAPREDUCE_373282607_1, ugi=11655 (auth:SIMPLE)]]
+
+        // 关闭
+        fileSystem.close();
     }
 
     /*
@@ -50,6 +59,8 @@ public class HdfsApiDemo  {
         FileSystem fileSystem = FileSystem.newInstance(configuration);
         // 输出 DFS[DFSClient[clientName=DFSClient_NONMAPREDUCE_373282607_1, ugi=11655 (auth:SIMPLE)]]
         System.out.println(fileSystem);
+        // 关闭
+        fileSystem.close();
     }
 
     /*
@@ -71,7 +82,7 @@ public class HdfsApiDemo  {
         // 调用方法listFiles 获取一个目录下的文件信息，为一个迭代器对象
         // 第一个参数：指定目录
         // 第二个参数，是否迭代获取
-        RemoteIterator<LocatedFileStatus> iterator = fileSystem.listFiles(new Path("/"), true);
+        RemoteIterator<LocatedFileStatus> iterator = fileSystem.listFiles(new Path("/user/hadoop"), true);
         //遍历迭代器，获取文件的详细信息
         while (iterator.hasNext()){
             LocatedFileStatus fileStatus = iterator.next();
@@ -124,6 +135,9 @@ public class HdfsApiDemo  {
     @Test
     public void downloadFile2() throws URISyntaxException, IOException {
         FileSystem fileSystem = FileSystem.get(new URI("hdfs://bigdata1:8020/a.txt"), new Configuration());
+        // 第一个参数，y要下载的HDFS文件路径
+        // 第二个参数，下载到本机的目录（不是虚拟机的主机）
+        // Path(String str)，路径类
         fileSystem.copyToLocalFile(new Path("/a.txt"), new Path("D://a2.txt"));
         fileSystem.close();
     }
@@ -134,6 +148,10 @@ public class HdfsApiDemo  {
     @Test
     public void uploadFile() throws URISyntaxException, IOException {
         FileSystem fileSystem = FileSystem.get(new URI("hdfs://bigdata1:8020/a.txt"), new Configuration());
+        /*
+        * 第一个参数：本地文件路径
+        * 第二个参数：要上传的HDFS目录
+        * */
         fileSystem.copyFromLocalFile(new Path("D://b.txt"),new Path("/"));
         fileSystem.close(); 
     }
@@ -164,12 +182,15 @@ public class HdfsApiDemo  {
         fileSystem.close();
     }
 
+    /*
+    * 文件下载到本地
+    * */
     @Test
     public void urlHDFS() throws IOException {
         // 注册URL
         URL.setURLStreamHandlerFactory(new FsUrlStreamHandlerFactory());
         //获取hdfs文件的输入流
-        InputStream inputStream = new URL("hdfs://bigdata1:8020/a.txt").openStream();
+        InputStream inputStream = new URL("hdfs://bigdata1:8020/user/hadoop/dongao123.txt").openStream();
         // 获取本地文件的输出流
         FileOutputStream fileOutputStream = new FileOutputStream(new File("D:\\hello.txt"));
         // 实现文件的拷贝
