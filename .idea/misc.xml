@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/TopN" />
+    <file type="web" url="file://$PROJECT_DIR$/TopN_Echart" />
+  </component>
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />
   </component>
@@ -12,6 +16,11 @@
         <option value="$PROJECT_DIR$/mapreduce/pom.xml" />
         <option value="$PROJECT_DIR$/hive/pom.xml" />
         <option value="$PROJECT_DIR$/hbase/pom.xml" />
+        <option value="$PROJECT_DIR$/mongoDB/pom.xml" />
+        <option value="$PROJECT_DIR$/TopN_Echart/TopN_Echart/pom.xml" />
+        <option value="$PROJECT_DIR$/TopN/pom.xml" />
+        <option value="$PROJECT_DIR$/mapreduce16实验/mapreduce16实验/pom.xml" />
+        <option value="$PROJECT_DIR$/mapreduce实验/pom.xml" />
       </list>
     </option>
   </component>

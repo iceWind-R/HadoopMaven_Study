@@ -36,6 +36,7 @@ public class WordCountReducer extends Reducer<Text, LongWritable, Text, LongWrit
     protected void reduce(Text key, Iterable<LongWritable> values, Context context) throws IOException, InterruptedException {
         long count = 0;
         LongWritable longWritable = new LongWritable();
+
         // 遍历values集合，将集合中的数字相加得到 V3
         for (LongWritable value : values) {
             count += value.get();

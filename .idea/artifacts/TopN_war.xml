@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="TopN:war">
+    <output-path>$PROJECT_DIR$/TopN/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>TopN</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="TopN.war">
+      <element id="artifact" artifact-name="TopN:war exploded" />
+    </root>
+  </artifact>
+</component>

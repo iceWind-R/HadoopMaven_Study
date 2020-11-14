@@ -6,11 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="zookeeper_api_demo" />
         <module name="hbase" />
-        <module name="hdfs_api_demo" />
         <module name="test" />
         <module name="hive" />
+        <module name="mongoDB" />
+        <module name="hdfs_api_demo" />
+        <module name="mapreduce实验" />
+        <module name="TopN" />
+        <module name="zookeeper_api_demo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -18,7 +21,11 @@
       <module name="hdfs_api_demo" target="1.8" />
       <module name="hive" target="1.8" />
       <module name="mapreduce" target="1.8" />
+      <module name="mapreduce实验" target="1.8" />
+      <module name="mongoDB" target="1.8" />
       <module name="test" target="1.8" />
+      <module name="TopN" target="1.8" />
+      <module name="TopN_Echart" target="1.8" />
       <module name="zookeeper_api_demo" target="1.8" />
     </bytecodeTargetLevel>
   </component>

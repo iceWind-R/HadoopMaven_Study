@@ -42,7 +42,7 @@ public class WordCountMapper extends Mapper<LongWritable, Text, Text, LongWritab
         Text text = new Text();
         LongWritable longWritable = new LongWritable();
         // 将一行的文本数据进行拆分
-        String[] split = value.toString().split(",");
+        String[] split = value.toString().split(" ");
         // 遍历数组，组装K2 和 V2
         for (String word : split) {
             text.set(word);

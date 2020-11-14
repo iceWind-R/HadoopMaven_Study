@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="TopN_Echart:war">
+    <output-path>$PROJECT_DIR$/TopN_Echart/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>TopN_Echart</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="TopN_Echart.war">
+      <element id="artifact" artifact-name="TopN_Echart:war exploded" />
+    </root>
+  </artifact>
+</component>
